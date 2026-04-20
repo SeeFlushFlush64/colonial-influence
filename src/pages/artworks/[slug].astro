@@ -1,0 +1,151 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+
+const artworks = {
+  fergusson: {
+    number: '01',
+    title: 'Fergusson Monument',
+    subtitle: 'Bust of Arthur Walsh Fergusson',
+    artist: 'Mariano Benlliure',
+    artistSlug: 'benlliure',
+    medium: 'Bronze with marble pedestal',
+    date: '1912',
+    location: 'National Museum of Fine Arts',
+    image: '/artworks/fergusson.jpg',
+    description: 'The piece presents a portrait bust depicting Fergusson\'s head and upper torso in formal attire, emphasizing his official status. His composed expression and upright posture convey a sense of discipline, dignity, and leadership.',
+    historical: 'Completed in 1912, the work embodies the influence of Western artistic traditions during the American colonial period in the Philippines. It reflects the practice of commemorating political figures through portraiture, while also highlighting the presence and impact of European artists in shaping Philippine visual culture at the time.',
+    analysis: 'Benlliure employs a strong realist approach, evident in the accurate anatomy and detailed modeling of the face. The contrast between the smooth marble pedestal and the textured bronze surface enhances visual depth. The balanced and symmetrical composition reinforces a sense of stability.',
+  },
+  spoliarium: {
+    number: '02',
+    title: 'Spoliarium',
+    subtitle: 'Spoliarium',
+    artist: 'Juan Luna',
+    artistSlug: 'juan-luna',
+    medium: 'Oil on canvas',
+    date: '1884',
+    location: 'National Museum of Fine Arts',
+    image: '/artworks/spoliarium.jpg',
+    description: 'A massive painting depicting the basement of the Roman Colosseum where dead and dying gladiators were stripped of their armor. It is widely interpreted as an allegory of the Philippine condition under Spanish colonial rule.',
+    historical: 'Painted in 1884 and awarded a gold medal at the Exposición Nacional de Bellas Artes in Madrid, the Spoliarium became a symbol of Filipino resistance. José Rizal described it as a work that mirrors the social, moral, and political life of the Philippines.',
+    analysis: 'Luna uses dramatic chiaroscuro, contrasting torchlight against deep shadow to heighten emotional tension. The massive scale — over 4 meters tall — overwhelms the viewer, forcing confrontation with scenes of suffering and indignity.',
+  },
+  bustamante: {
+    number: '03',
+    title: "Bustamante's Assassination",
+    subtitle: 'El Asesinato del Gobernador Bustamante',
+    artist: 'Félix Resurrección Hidalgo',
+    artistSlug: 'hidalgo',
+    medium: 'Oil on canvas',
+    date: '1884',
+    location: 'National Museum of Fine Arts',
+    image: '/artworks/bustamante.jpg',
+    description: 'The painting depicts the violent assassination of Governor Fernando Manuel de Bustamante in 1719, killed by a mob incited by members of the Church. The scene is chaotic, filled with figures in conflict.',
+    historical: 'This work addresses the complex power struggles between the Church and the colonial government in 18th-century Philippines. Hidalgo painted it during a period of growing Filipino national consciousness, making it both a historical record and a political statement.',
+    analysis: 'Hidalgo captures motion and violence through diagonal compositions and expressive brushwork. The use of warm light draws attention to the central conflict while peripheral figures blur into shadow, mirroring the chaos of the moment.',
+  },
+  altarpiece: {
+    number: '04',
+    title: 'Altarpiece',
+    subtitle: 'Retablo',
+    artist: 'Unknown',
+    artistSlug: null,
+    medium: 'Wood, gilt',
+    date: '17th–18th century',
+    location: 'National Museum of Fine Arts',
+    image: '/artworks/altarpiece.jpg',
+    description: 'An ornate wooden altarpiece featuring elaborate gilded carvings in the Baroque style. Its layered architectural structure with niches, columns, and decorative motifs reflects the fusion of Spanish religious art with local craftsmanship.',
+    historical: 'Altarpieces like this were central to the Catholic conversion efforts during Spanish colonization. They served as focal points for worship and demonstrated the Church\'s wealth and authority, while also providing Filipino artisans opportunities to embed local artistic sensibilities.',
+    analysis: 'The work demonstrates a synthesis of European Baroque forms with indigenous woodcarving traditions. The density of ornament and verticality of the structure direct the viewer\'s gaze upward, reinforcing the spiritual hierarchy the Church sought to establish.',
+  },
+  josephine: {
+    number: '05',
+    title: 'Josephine Sleeping',
+    subtitle: 'Josephine Sleeping',
+    artist: 'Dr. José Rizal',
+    artistSlug: 'jose-rizal',
+    medium: 'Sculpture',
+    date: '1890s',
+    location: 'National Museum of Fine Arts',
+    image: '/artworks/josephine.jpg',
+    description: 'A delicate sculpture created by José Rizal depicting a sleeping woman, believed to be inspired by Josephine Bracken, his companion during his exile in Dapitan.',
+    historical: 'Created during Rizal\'s exile, the sculpture reveals a more intimate and personal side of the national hero. It reflects his wide-ranging talents and his emotional life during one of the most difficult periods of Spanish colonial repression.',
+    analysis: 'The work shows Rizal\'s skill as a sculptor, with careful attention to the softness of form and the stillness of sleep. The intimacy of the subject contrasts sharply with the monumental political legacy Rizal is remembered for.',
+  },
+};
+
+export function getStaticPaths() {
+  return [
+    { params: { slug: 'fergusson' } },
+    { params: { slug: 'spoliarium' } },
+    { params: { slug: 'bustamante' } },
+    { params: { slug: 'altarpiece' } },
+    { params: { slug: 'josephine' } },
+  ];
+}
+
+const { slug } = Astro.params;
+const art = artworks[slug as keyof typeof artworks];
+
+if (!art) return Astro.redirect('/artworks');
+---
+
+<Layout title={art.title}>
+  <!-- Hero -->
+  <section style="position:relative;height:70vh;overflow:hidden;display:flex;align-items:flex-end;">
+    <img src={art.image} alt={art.title} style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(0.4);" />
+    <div style="position:absolute;inset:0;background:linear-gradient(to top, rgba(10,10,10,1) 0%, transparent 60%);"></div>
+    <div style="position:relative;padding:4rem;width:100%;">
+      <p style="font-size:0.7rem;letter-spacing:0.4em;opacity:0.5;margin-bottom:1rem;">/{art.number} — {art.location}</p>
+      <h1 style="font-family:'Cormorant Garamond',serif;font-size:clamp(3rem,6vw,6rem);font-weight:300;line-height:1;">{art.title}</h1>
+      <p style="font-size:0.8rem;letter-spacing:0.2em;text-transform:uppercase;opacity:0.6;margin-top:0.75rem;">{art.subtitle}</p>
+    </div>
+  </section>
+
+  <!-- Content -->
+  <section style="max-width:1100px;margin:0 auto;padding:6rem 4rem;display:grid;grid-template-columns:1fr 320px;gap:6rem;">
+    
+    <!-- Main -->
+    <div>
+      <p style="font-size:1.1rem;line-height:1.9;opacity:0.8;margin-bottom:4rem;">{art.description}</p>
+
+      <h2 style="font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:400;margin-bottom:1rem;">Historical Context</h2>
+      <p style="font-size:0.95rem;line-height:1.9;opacity:0.7;margin-bottom:4rem;">{art.historical}</p>
+
+      <h2 style="font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:400;margin-bottom:1rem;">Artistic Analysis</h2>
+      <p style="font-size:0.95rem;line-height:1.9;opacity:0.7;">{art.analysis}</p>
+    </div>
+
+    <!-- Sidebar -->
+    <div style="border-left:1px solid rgba(245,240,232,0.1);padding-left:3rem;">
+      <h3 style="font-size:0.65rem;letter-spacing:0.3em;text-transform:uppercase;opacity:0.4;margin-bottom:2rem;">Artwork Details</h3>
+      
+      <div style="margin-bottom:1.5rem;">
+        <p style="font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;opacity:0.4;margin-bottom:0.4rem;">Artist</p>
+        {art.artistSlug ? (
+          <a href={`/artists/${art.artistSlug}`} style="font-size:1rem;color:#f5f0e8;text-decoration:none;border-bottom:1px solid rgba(245,240,232,0.3);">{art.artist}</a>
+        ) : (
+          <p style="font-size:1rem;">{art.artist}</p>
+        )}
+      </div>
+
+      <div style="margin-bottom:1.5rem;">
+        <p style="font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;opacity:0.4;margin-bottom:0.4rem;">Medium</p>
+        <p style="font-size:1rem;">{art.medium}</p>
+      </div>
+
+      <div style="margin-bottom:1.5rem;">
+        <p style="font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;opacity:0.4;margin-bottom:0.4rem;">Date</p>
+        <p style="font-size:1rem;">{art.date}</p>
+      </div>
+
+      <div style="margin-bottom:3rem;">
+        <p style="font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;opacity:0.4;margin-bottom:0.4rem;">Location</p>
+        <p style="font-size:1rem;">{art.location}</p>
+      </div>
+
+      <a href="/artworks" style="font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;color:#f5f0e8;text-decoration:none;opacity:0.5;">← Back to Collection</a>
+    </div>
+  </section>
+</Layout>

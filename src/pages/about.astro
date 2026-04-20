@@ -1,0 +1,200 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const members = [
+  'Biagtan, Mark Justine Fernandez',
+  'Andrion, Ken Edward Aquino',
+  'Sebastian, David Maru Boquiren',
+  'Rodriguez, Eril John Maya',
+  'Galumba, Clint Justine Ulanday',
+  'Gusto, Larr Andreison Tejada',
+  'Botacion, Juaqin Parambita',
+  'Manuel, John Rey Cayabyab',
+  'Mapile, Marc Raven Ocomen',
+  'Nazareno, Ace Fernandez',
+];
+
+const artworks = [
+  {
+    number: '01',
+    slug: 'fergusson',
+    title: 'Fergusson Monument',
+    artist: 'Mariano Benlliure',
+    date: '1912',
+    reason: 'A bronze funerary bust that embodies the material legacy of Spanish colonial patronage — the commissioning of European masters to immortalize figures of empire on Philippine soil.',
+  },
+  {
+    number: '02',
+    slug: 'spoliarium',
+    title: 'Spoliarium',
+    artist: 'Juan Luna',
+    date: '1884',
+    reason: "Luna's gold-medal canvas at the Madrid exposition became a symbol of Filipino intellectual equality — a colonial subject proving mastery of the colonizer's own artistic tradition.",
+  },
+  {
+    number: '03',
+    slug: 'bustamante',
+    title: "Bustamante's Assassination",
+    artist: 'Felix Resurreccion Hidalgo',
+    date: '1884',
+    reason: "Hidalgo's depiction of a governor-general's murder captures the volatile relationship between colonial authority and the forces that resisted it — rendered in the romantic realist style of 19th-century Europe.",
+  },
+  {
+    number: '04',
+    slug: 'altarpiece',
+    title: 'Altarpiece',
+    artist: 'Unknown',
+    date: 'c. 19th century',
+    reason: 'An anonymous devotional work that reflects the deep entrenchment of the Catholic Church in Philippine colonial life — faith as both comfort and instrument of cultural control.',
+  },
+  {
+    number: '05',
+    slug: 'josephine',
+    title: 'Josephine Sleeping',
+    artist: 'Dr. Jose Rizal',
+    date: 'c. 1890s',
+    reason: "Created during Rizal's exile in Dapitan, this tender sculpture reveals the private humanity of the national hero — an artist and lover beneath the revolutionary, made during the last years before his execution.",
+  },
+];
+---
+
+<Layout title="About | Colonial Influence">
+  <main style="min-height:100vh;">
+
+    <!-- HERO with museum background -->
+    <section style="position:relative;min-height:70vh;display:flex;flex-direction:column;justify-content:flex-end;padding:10rem 4rem 5rem;overflow:hidden;">
+
+      <!-- Background image -->
+      <div style="position:absolute;inset:0;z-index:0;">
+        <img
+          src="/bg-mnfa.jpg"
+          alt="National Museum of Fine Arts"
+          style="width:100%;height:100%;object-fit:cover;object-position:center 40%;filter:brightness(0.35) sepia(30%) contrast(1.1);"
+        />
+        <!-- Bottom fade to black -->
+        <div style="position:absolute;inset:0;background:linear-gradient(to bottom, rgba(10,10,10,0.3) 0%, rgba(10,10,10,0.5) 60%, #0a0a0a 100%);"></div>
+      </div>
+
+      <!-- Content -->
+      <div style="position:relative;z-index:1;">
+        <p style="font-family:'Inter',sans-serif;font-size:0.7rem;letter-spacing:0.4em;text-transform:uppercase;opacity:0.5;margin-bottom:1.25rem;">About This Project</p>
+        <h1 style="font-family:'Cormorant Garamond',serif;font-size:clamp(2.8rem,6vw,6rem);font-weight:300;line-height:1.05;max-width:900px;margin-bottom:2rem;">
+          Colonial Influence —<br/>A Virtual Museum Tour
+        </h1>
+        <div style="width:40px;height:1px;background:rgba(245,240,232,0.35);margin-bottom:2rem;"></div>
+        <p style="font-family:'Inter',sans-serif;font-size:1rem;line-height:1.85;opacity:0.65;font-weight:300;max-width:600px;">
+          A school project by BSME Studio, Group 5 — presenting five works from the National Museum of Fine Arts through the lens of colonial history, artistic identity, and cultural memory.
+        </p>
+      </div>
+
+    </section>
+
+    <!-- COLONIAL CONTEXT -->
+    <section style="max-width:860px;margin:0 auto;padding:6rem 4rem;">
+      <p style="font-family:'Inter',sans-serif;font-size:0.65rem;letter-spacing:0.35em;text-transform:uppercase;opacity:0.35;margin-bottom:1.5rem;">Historical Context</p>
+      <h2 style="font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:300;margin-bottom:2.5rem;line-height:1.2;">The Colonial Period in the Philippines</h2>
+
+      <p style="font-family:'Inter',sans-serif;font-size:0.95rem;line-height:1.95;opacity:0.7;font-weight:300;margin-bottom:1.75rem;">
+        The Philippines endured over three centuries of Spanish colonial rule, from 1565 to 1898 — one of the longest colonial relationships in modern history. During this period, Spanish governance, the Catholic Church, and European cultural norms were systematically imposed upon a diverse archipelago of indigenous peoples. Language, religion, land, and identity were all reshaped by colonial power.
+      </p>
+      <p style="font-family:'Inter',sans-serif;font-size:0.95rem;line-height:1.95;opacity:0.7;font-weight:300;margin-bottom:1.75rem;">
+        The 19th century saw the rise of the Ilustrado class — educated, often European-trained Filipinos who began asserting a distinct national consciousness. Figures like Jose Rizal, Juan Luna, and Felix Resurreccion Hidalgo moved through the salons and academies of Madrid, Paris, and Rome, claiming space in the colonial center while carrying the weight of a colonized homeland.
+      </p>
+      <p style="font-family:'Inter',sans-serif;font-size:0.95rem;line-height:1.95;opacity:0.7;font-weight:300;">
+        In 1898, following the Spanish-American War, the Philippines was ceded to the United States — beginning a new colonial chapter that brought public education, infrastructure, and English, alongside new forms of cultural displacement and political suppression. The artworks in this collection sit at the intersection of both colonial periods, each carrying traces of the forces that shaped them.
+      </p>
+    </section>
+
+    <!-- DIVIDER -->
+    <div style="max-width:860px;margin:0 auto;padding:0 4rem;">
+      <div style="height:1px;background:rgba(245,240,232,0.08);"></div>
+    </div>
+
+    <!-- ARTWORKS SECTION -->
+    <section style="max-width:860px;margin:0 auto;padding:6rem 4rem;">
+      <p style="font-family:'Inter',sans-serif;font-size:0.65rem;letter-spacing:0.35em;text-transform:uppercase;opacity:0.35;margin-bottom:1.5rem;">The Collection</p>
+      <h2 style="font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:300;margin-bottom:1rem;line-height:1.2;">Five Works, Five Stories</h2>
+      <p style="font-family:'Inter',sans-serif;font-size:0.95rem;line-height:1.85;opacity:0.6;font-weight:300;margin-bottom:4rem;">
+        These works were chosen not only for their artistic merit, but for the way each one illuminates a different facet of colonial influence — patronage, resistance, faith, exile, and ambition.
+      </p>
+
+      <div style="display:flex;flex-direction:column;">
+        {artworks.map((work) => (
+          <a
+            href={`/artworks/${work.slug}`}
+            class="artwork-row"
+            style="display:grid;grid-template-columns:3rem 1fr;gap:2rem;padding:2.5rem 0;border-top:1px solid rgba(245,240,232,0.07);text-decoration:none;color:#f5f0e8;transition:background 0.2s ease;"
+          >
+            <span style="font-family:'Cormorant Garamond',serif;font-size:0.85rem;opacity:0.25;padding-top:0.2rem;">/{work.number}</span>
+            <div>
+              <div style="display:flex;align-items:baseline;gap:1rem;margin-bottom:0.5rem;flex-wrap:wrap;">
+                <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:300;">{work.title}</h3>
+                <span style="font-family:'Inter',sans-serif;font-size:0.7rem;opacity:0.4;letter-spacing:0.1em;">{work.artist} · {work.date}</span>
+              </div>
+              <p style="font-family:'Inter',sans-serif;font-size:0.875rem;line-height:1.8;opacity:0.6;font-weight:300;">{work.reason}</p>
+            </div>
+          </a>
+        ))}
+        <div style="border-top:1px solid rgba(245,240,232,0.07);"></div>
+      </div>
+    </section>
+
+    <!-- DIVIDER -->
+    <div style="max-width:860px;margin:0 auto;padding:0 4rem;">
+      <div style="height:1px;background:rgba(245,240,232,0.08);"></div>
+    </div>
+
+    <!-- CREDITS -->
+    <section style="max-width:860px;margin:0 auto;padding:6rem 4rem 8rem;">
+      <p style="font-family:'Inter',sans-serif;font-size:0.65rem;letter-spacing:0.35em;text-transform:uppercase;opacity:0.35;margin-bottom:1.5rem;">Credits</p>
+      <h2 style="font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:300;margin-bottom:3rem;line-height:1.2;">Acknowledgments</h2>
+
+      <!-- Top credits grid -->
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:3rem;margin-bottom:4rem;">
+        <div>
+          <p style="font-family:'Inter',sans-serif;font-size:0.65rem;letter-spacing:0.3em;text-transform:uppercase;opacity:0.35;margin-bottom:0.75rem;">Course & Section</p>
+          <p style="font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:300;margin-bottom:0.25rem;">BSME Studio</p>
+          <p style="font-family:'Inter',sans-serif;font-size:0.85rem;opacity:0.5;">Group 5</p>
+        </div>
+        <div>
+          <p style="font-family:'Inter',sans-serif;font-size:0.65rem;letter-spacing:0.3em;text-transform:uppercase;opacity:0.35;margin-bottom:0.75rem;">Primary Source</p>
+          <p style="font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:300;margin-bottom:0.25rem;">National Museum of Fine Arts</p>
+          <p style="font-family:'Inter',sans-serif;font-size:0.85rem;opacity:0.5;">Manila, Philippines</p>
+        </div>
+        <div>
+          <p style="font-family:'Inter',sans-serif;font-size:0.65rem;letter-spacing:0.3em;text-transform:uppercase;opacity:0.35;margin-bottom:0.75rem;">Built With</p>
+          <p style="font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:300;margin-bottom:0.25rem;">Astro + Tailwind CSS</p>
+          <p style="font-family:'Inter',sans-serif;font-size:0.85rem;opacity:0.5;">Deployed on Vercel</p>
+        </div>
+        <div>
+          <p style="font-family:'Inter',sans-serif;font-size:0.65rem;letter-spacing:0.3em;text-transform:uppercase;opacity:0.35;margin-bottom:0.75rem;">Typography</p>
+          <p style="font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:300;margin-bottom:0.25rem;">Cormorant Garamond</p>
+          <p style="font-family:'Inter',sans-serif;font-size:0.85rem;opacity:0.5;">Inter — via Google Fonts</p>
+        </div>
+      </div>
+
+      <!-- Divider -->
+      <div style="height:1px;background:rgba(245,240,232,0.08);margin-bottom:3rem;"></div>
+
+      <!-- Members -->
+      <div>
+        <p style="font-family:'Inter',sans-serif;font-size:0.65rem;letter-spacing:0.3em;text-transform:uppercase;opacity:0.35;margin-bottom:2rem;">Project Members</p>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:0;">
+          {members.map((member) => (
+            <div style="padding:0.85rem 0;border-top:1px solid rgba(245,240,232,0.06);">
+              <p style="font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:300;opacity:0.85;">{member}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+</Layout>
+
+<style>
+  .artwork-row:hover {
+    background: rgba(245,240,232,0.02);
+  }
+</style>

@@ -1,0 +1,80 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const artists = [
+  { number: '01', slug: 'benlliure', name: 'Mariano Benlliure', nationality: 'Spanish', period: '1862–1947', role: 'Sculptor', image: '/artists/benlliure.jpg', position: 'center 30%' },
+  { number: '02', slug: 'juan-luna', name: 'Juan Luna', nationality: 'Filipino', period: '1857–1899', role: 'Painter', image: '/artists/juan-luna.jpg', position: 'center 20%' },
+  { number: '03', slug: 'hidalgo', name: 'Felix Resurreccion Hidalgo', nationality: 'Filipino', period: '1855–1913', role: 'Painter', image: '/artists/hidalgo.jpg', position: 'center 15%' },
+  { number: '04', slug: 'jose-rizal', name: 'Dr. Jose Rizal', nationality: 'Filipino', period: '1861–1896', role: 'Polymath & National Hero', image: '/artists/jose-rizal.jpg', position: 'center 25%' },
+];
+---
+
+<Layout title="Artists — Colonial Influence">
+  <main style="min-height:100vh;">
+
+    <!-- Header — tightened to keep grid visible on load -->
+    <div style="padding:7rem 4rem 1.5rem;">
+      <p style="font-size:0.7rem;letter-spacing:0.4em;text-transform:uppercase;opacity:0.5;margin-bottom:1rem;">The Collection</p>
+      <h1 style="font-family:'Cormorant Garamond',serif;font-size:clamp(3rem,6vw,6rem);font-weight:300;line-height:1;">Artists</h1>
+      <div style="width:40px;height:1px;background:rgba(245,240,232,0.3);margin-top:1.5rem;"></div>
+    </div>
+
+    <!-- Portrait Grid — 2 columns x 2 rows, each card 50vh -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;grid-template-rows:50vh 50vh;gap:2px;">
+      {artists.map((artist) => (
+        <a
+          href={`/artists/${artist.slug}`}
+          class="artist-card"
+          style="position:relative;overflow:hidden;display:block;text-decoration:none;color:#f5f0e8;background:#111;"
+        >
+          <!-- Portrait image -->
+          <img
+            src={artist.image}
+            alt={artist.name}
+            class="artist-img"
+            style={`width:100%;height:100%;object-fit:cover;object-position:${artist.position};filter:sepia(50%) brightness(0.65) contrast(1.1);transition:transform 0.8s ease, filter 0.8s ease;`}
+          />
+
+          <!-- Gradient overlay -->
+          <div style="position:absolute;inset:0;background:linear-gradient(to top, rgba(10,10,10,0.92) 0%, rgba(10,10,10,0.2) 50%, transparent 100%);"></div>
+
+          <!-- Text -->
+          <div style="position:absolute;bottom:0;left:0;right:0;padding:2rem 2.5rem;">
+            <p style="font-family:'Inter',sans-serif;font-size:0.7rem;letter-spacing:0.35em;text-transform:uppercase;opacity:0.55;margin-bottom:0.5rem;">
+              {artist.nationality} · {artist.role}
+            </p>
+            <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(1.5rem,2.2vw,2.2rem);font-weight:300;line-height:1.1;margin-bottom:0.4rem;">
+              {artist.name}
+            </h2>
+            <p style="font-family:'Inter',sans-serif;font-size:0.75rem;opacity:0.4;letter-spacing:0.12em;">
+              {artist.period}
+            </p>
+          </div>
+
+          <!-- Number badge -->
+          <div style="position:absolute;top:1.5rem;left:1.75rem;">
+            <span style="font-family:'Cormorant Garamond',serif;font-size:0.8rem;opacity:0.45;letter-spacing:0.1em;">/{artist.number}</span>
+          </div>
+
+          <!-- Arrow -->
+          <div style="position:absolute;top:1.5rem;right:1.75rem;">
+            <span class="artist-arrow" style="font-size:1rem;opacity:0.45;display:inline-block;transition:transform 0.3s ease, opacity 0.3s ease;">→</span>
+          </div>
+
+        </a>
+      ))}
+    </div>
+
+  </main>
+</Layout>
+
+<style>
+  .artist-card:hover .artist-img {
+    transform: scale(1.04);
+    filter: sepia(30%) brightness(0.75) contrast(1.1);
+  }
+  .artist-card:hover .artist-arrow {
+    transform: translateX(5px);
+    opacity: 0.9 !important;
+  }
+</style>    

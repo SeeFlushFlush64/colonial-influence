@@ -1,0 +1,182 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const artists = {
+  benlliure: {
+    name: 'Mariano Benlliure',
+    nationality: 'Spanish',
+    period: '1862–1947',
+    role: 'Sculptor',
+    image: '/artists/benlliure.jpg',
+    bio: [
+      "Mariano Benlliure Gil was one of Spain's most celebrated sculptors, born in Valencia in 1862. He rose to international prominence for his exceptional skill in bronze casting and his ability to render the human form with remarkable lifelike detail.",
+      "His works span religious commissions, public monuments, and intimate portrait busts — many of which commemorate significant military and political figures of the Spanish empire. His sculptures are noted for their expressive faces, meticulous surface textures, and a commanding sense of weight and presence.",
+      "Among his works in the Philippines is the Fergusson Monument (1912), a bronze funerary bust commissioned to honor a figure of the colonial period. The piece exemplifies Benlliure's signature approach: psychological intensity captured in stillness.",
+    ],
+    artworks: [
+      { slug: 'fergusson', title: 'Fergusson Monument', date: '1912' },
+    ],
+  },
+  'juan-luna': {
+    name: 'Juan Luna',
+    nationality: 'Filipino',
+    period: '1857–1899',
+    role: 'Painter',
+    image: '/artists/juan-luna.jpg',
+    bio: [
+      "Juan Luna y Novicio was a pioneering Filipino painter and political activist, widely regarded as one of the first Filipinos to achieve recognition in the Western art world. Born in Badoc, Ilocos Norte in 1857, he trained at the Escuela de Bellas Artes in Manila before continuing his studies in Europe.",
+      "In 1884, Luna won the gold medal at the Exposición Nacional de Bellas Artes in Madrid for his monumental painting Spoliarium — a landmark moment for Filipino representation in the colonial era. The victory was celebrated by the Filipino community in Europe as a symbol of national pride and intellectual equality.",
+      "Luna's work fused classical academic technique with emotionally charged subject matter, often drawn from Roman history to speak indirectly about colonial subjugation. He died in Hong Kong in 1899 at the age of 42.",
+    ],
+    artworks: [
+      { slug: 'spoliarium', title: 'Spoliarium', date: '1884' },
+    ],
+  },
+  hidalgo: {
+    name: 'Felix Resurreccion Hidalgo',
+    nationality: 'Filipino',
+    period: '1855–1913',
+    role: 'Painter',
+    image: '/artists/hidalgo.jpg',
+    bio: [
+      "Felix Resurreccion Hidalgo y Padilla was a Filipino painter born in Binondo, Manila in 1855. A contemporary and close friend of Juan Luna, he also studied in Europe and gained recognition at the same 1884 Exposición Nacional de Bellas Artes, where he received a silver medal.",
+      "Hidalgo's style is characterized by romantic realism — scenes suffused with atmosphere, emotional gravity, and a mastery of light. His paintings often depicted dramatic historical moments and allegorical subjects, reflecting the turbulent political climate of 19th-century colonial Philippines.",
+      "Unlike Luna's monumental canvases, Hidalgo's work tends toward intimacy and psychological depth. He spent much of his career in Europe and died in Barcelona in 1913.",
+    ],
+    artworks: [
+      { slug: 'bustamante', title: "Bustamante's Assassination", date: '1884' },
+    ],
+  },
+  'jose-rizal': {
+    name: 'Dr. Jose Rizal',
+    nationality: 'Filipino',
+    period: '1861–1896',
+    role: 'Polymath & National Hero',
+    image: '/artists/jose-rizal.jpg',
+    bio: [
+      "José Protasio Rizal Mercado y Alonso Realonda was the national hero of the Philippines and one of the most remarkable figures of the 19th century. Born in Calamba, Laguna in 1861, he was a novelist, poet, ophthalmologist, sculptor, painter, and political reformist.",
+      "Rizal's two novels, Noli Me Tangere (1887) and El Filibusterismo (1891), exposed the abuses of Spanish colonial rule and the Catholic clergy in the Philippines. These works galvanized the reform movement and, later, the Philippine Revolution.",
+      "During his exile in Dapitan from 1892 to 1896, Rizal created Josephine Sleeping, a tender portrait of his partner Josephine Bracken. He was executed by Spanish authorities on December 30, 1896, at the age of 35.",
+    ],
+    artworks: [
+      { slug: 'josephine', title: 'Josephine Sleeping', date: 'c. 1890s' },
+    ],
+  },
+};
+
+export function getStaticPaths() {
+  return [
+    { params: { slug: 'benlliure' } },
+    { params: { slug: 'juan-luna' } },
+    { params: { slug: 'hidalgo' } },
+    { params: { slug: 'jose-rizal' } },
+  ];
+}
+
+const { slug } = Astro.params;
+const artist = artists[slug as keyof typeof artists];
+
+if (!artist) return Astro.redirect('/artists');
+---
+
+<Layout title={`${artist.name} | Colonial Influence`}>
+  <main style="min-height:100vh;">
+
+    <!-- SPLIT HERO -->
+    <section style="display:grid;grid-template-columns:1fr 1fr;min-height:100vh;">
+
+      <!-- Left: Portrait -->
+      <div style="position:relative;overflow:hidden;">
+        <img
+          src={artist.image}
+          alt={artist.name}
+          style="width:100%;height:100%;object-fit:cover;object-position:center top;filter:sepia(60%) brightness(0.75) contrast(1.1);"
+        />
+        <div style="position:absolute;inset:0;background:linear-gradient(to right, transparent 60%, #0a0a0a 100%);"></div>
+        <div style="position:absolute;inset:0;background:linear-gradient(to top, rgba(10,10,10,0.4) 0%, transparent 40%);"></div>
+      </div>
+
+      <!-- Right: Info — starts from top, padded down from nav -->
+      <div style="display:flex;flex-direction:column;justify-content:flex-start;padding:9rem 5rem 5rem 4rem;background:#0a0a0a;">
+
+        <a href="/artists" style="font-family:'Inter',sans-serif;font-size:0.65rem;letter-spacing:0.3em;text-transform:uppercase;opacity:0.35;color:#f5f0e8;text-decoration:none;margin-bottom:3rem;display:inline-block;transition:opacity 0.2s ease;">
+          ← Artists
+        </a>
+
+        <p style="font-family:'Inter',sans-serif;font-size:0.7rem;letter-spacing:0.35em;text-transform:uppercase;opacity:0.5;margin-bottom:0.85rem;">
+          {artist.nationality} · {artist.role}
+        </p>
+
+        <h1 style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(2.4rem,3.5vw,4rem);line-height:1.05;color:#f5f0e8;margin-bottom:0.85rem;">
+          {artist.name}
+        </h1>
+
+        <p style="font-family:'Inter',sans-serif;font-size:0.8rem;letter-spacing:0.15em;opacity:0.4;margin-bottom:2.5rem;">
+          {artist.period}
+        </p>
+
+        <div style="width:40px;height:1px;background:rgba(245,240,232,0.25);margin-bottom:2.5rem;"></div>
+
+        <p style="font-family:'Inter',sans-serif;font-size:0.95rem;line-height:1.9;opacity:0.7;font-weight:300;margin-bottom:3rem;">
+          {artist.bio[0]}
+        </p>
+
+        <!-- Works in Collection -->
+        <div>
+          <p style="font-family:'Inter',sans-serif;font-size:0.65rem;letter-spacing:0.3em;text-transform:uppercase;opacity:0.35;margin-bottom:1rem;">
+            Works in Collection
+          </p>
+          {artist.artworks.map((work) => (
+            <a
+              href={`/artworks/${work.slug}`}
+              class="work-link"
+              style="display:inline-flex;align-items:center;gap:10px;font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:300;color:#f5f0e8;text-decoration:none;border-bottom:1px solid rgba(245,240,232,0.2);padding-bottom:4px;opacity:0.75;transition:opacity 0.2s ease, border-color 0.2s ease;"
+            >
+              {work.title}
+              <span style="font-family:'Inter',sans-serif;font-size:0.75rem;opacity:0.5;">({work.date})</span>
+              <span class="work-arrow" style="font-size:0.8rem;opacity:0;transition:opacity 0.2s ease, transform 0.2s ease;display:inline-block;">→</span>
+            </a>
+          ))}
+        </div>
+
+      </div>
+    </section>
+
+    <!-- FULL BIOGRAPHY -->
+    <section style="max-width:860px;margin:0 auto;padding:7rem 4rem;">
+
+      <div style="width:40px;height:1px;background:rgba(245,240,232,0.15);margin-bottom:3rem;"></div>
+
+      <h2 style="font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:400;margin-bottom:3rem;opacity:0.9;letter-spacing:0.02em;">Full Biography</h2>
+
+      {artist.bio.map((paragraph, i) => (
+        i > 0 && (
+          <p style="font-family:'Inter',sans-serif;font-size:0.95rem;line-height:1.95;opacity:0.7;margin-bottom:2rem;font-weight:300;">
+            {paragraph}
+          </p>
+        )
+      ))}
+
+      <div style="margin-top:5rem;padding-top:3rem;border-top:1px solid rgba(245,240,232,0.08);">
+        <a href="/artists" class="back-link" style="font-family:'Inter',sans-serif;font-size:0.7rem;letter-spacing:0.25em;text-transform:uppercase;color:#f5f0e8;text-decoration:none;opacity:0.4;transition:opacity 0.2s ease;">
+          ← Back to Artists
+        </a>
+      </div>
+    </section>
+
+  </main>
+</Layout>
+
+<style>
+  .work-link:hover {
+    opacity: 1 !important;
+    border-color: rgba(245,240,232,0.6) !important;
+  }
+  .work-link:hover .work-arrow {
+    opacity: 0.7 !important;
+    transform: translateX(4px);
+  }
+  .back-link:hover {
+    opacity: 0.75 !important;
+  }
+</style>
