@@ -150,7 +150,7 @@ const artworks = [
       <h2 style="font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:300;margin-bottom:3rem;line-height:1.2;">Acknowledgments</h2>
 
       <!-- Top credits grid -->
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:3rem;margin-bottom:4rem;">
+      <div class="credits-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:3rem;margin-bottom:4rem;">
         <div>
           <p style="font-family:'Inter',sans-serif;font-size:0.65rem;letter-spacing:0.3em;text-transform:uppercase;opacity:0.35;margin-bottom:0.75rem;">Course & Section</p>
           <p style="font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:300;margin-bottom:0.25rem;">BSME Studio</p>
@@ -179,7 +179,7 @@ const artworks = [
       <!-- Members -->
       <div>
         <p style="font-family:'Inter',sans-serif;font-size:0.65rem;letter-spacing:0.3em;text-transform:uppercase;opacity:0.35;margin-bottom:2rem;">Project Members</p>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:0;">
+        <div class="members-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:0;">
           {members.map((member) => (
             <div style="padding:0.85rem 0;border-top:1px solid rgba(245,240,232,0.06);">
               <p style="font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:300;opacity:0.85;">{member}</p>
@@ -197,4 +197,15 @@ const artworks = [
   .artwork-row:hover {
     background: rgba(245,240,232,0.02);
   }
+  @media (max-width: 640px) {
+  .members-grid {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 640px) {
+  .credits-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}
 </style>

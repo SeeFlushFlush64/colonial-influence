@@ -83,27 +83,27 @@ if (!artist) return Astro.redirect('/artists');
   <main style="min-height:100vh;">
 
     <!-- SPLIT HERO -->
-    <section style="display:grid;grid-template-columns:1fr 1fr;min-height:100vh;">
+    <section class="artist-hero">
 
       <!-- Left: Portrait -->
-      <div style="position:relative;overflow:hidden;">
+      <div class="artist-portrait">
         <img
           src={artist.image}
           alt={artist.name}
-          style="width:100%;height:100%;object-fit:cover;object-position:center top;filter:sepia(60%) brightness(0.75) contrast(1.1);"
+          style="width:100%;height:100%;object-fit:cover;object-position:center 15%;filter:sepia(60%) brightness(0.75) contrast(1.1);"
         />
-        <div style="position:absolute;inset:0;background:linear-gradient(to right, transparent 60%, #0a0a0a 100%);"></div>
+        <div class="portrait-fade-right"></div>
         <div style="position:absolute;inset:0;background:linear-gradient(to top, rgba(10,10,10,0.4) 0%, transparent 40%);"></div>
       </div>
 
-      <!-- Right: Info — starts from top, padded down from nav -->
-      <div style="display:flex;flex-direction:column;justify-content:flex-start;padding:9rem 5rem 5rem 4rem;background:#0a0a0a;">
+      <!-- Right: Info -->
+      <div class="artist-info">
 
-        <a href="/artists" style="font-family:'Inter',sans-serif;font-size:0.65rem;letter-spacing:0.3em;text-transform:uppercase;opacity:0.35;color:#f5f0e8;text-decoration:none;margin-bottom:3rem;display:inline-block;transition:opacity 0.2s ease;">
+        <a href="/artists" style="font-family:'Inter',sans-serif;font-size:0.65rem;letter-spacing:0.3em;text-transform:uppercase;opacity:0.35;color:#f5f0e8;text-decoration:none;margin-bottom:3rem;display:inline-block;">
           ← Artists
         </a>
 
-        <p style="font-family:'Inter',sans-serif;font-size:0.7rem;letter-spacing:0.35em;text-transform:uppercase;opacity:0.5;margin-bottom:0.85rem;">
+        <p class="artist-role">
           {artist.nationality} · {artist.role}
         </p>
 
@@ -121,7 +121,6 @@ if (!artist) return Astro.redirect('/artists');
           {artist.bio[0]}
         </p>
 
-        <!-- Works in Collection -->
         <div>
           <p style="font-family:'Inter',sans-serif;font-size:0.65rem;letter-spacing:0.3em;text-transform:uppercase;opacity:0.35;margin-bottom:1rem;">
             Works in Collection
@@ -130,11 +129,11 @@ if (!artist) return Astro.redirect('/artists');
             <a
               href={`/artworks/${work.slug}`}
               class="work-link"
-              style="display:inline-flex;align-items:center;gap:10px;font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:300;color:#f5f0e8;text-decoration:none;border-bottom:1px solid rgba(245,240,232,0.2);padding-bottom:4px;opacity:0.75;transition:opacity 0.2s ease, border-color 0.2s ease;"
+              style="display:inline-flex;align-items:center;gap:10px;font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:300;color:#f5f0e8;text-decoration:none;border-bottom:1px solid rgba(245,240,232,0.2);padding-bottom:4px;opacity:0.75;transition:opacity 0.2s ease,border-color 0.2s ease;"
             >
               {work.title}
               <span style="font-family:'Inter',sans-serif;font-size:0.75rem;opacity:0.5;">({work.date})</span>
-              <span class="work-arrow" style="font-size:0.8rem;opacity:0;transition:opacity 0.2s ease, transform 0.2s ease;display:inline-block;">→</span>
+              <span class="work-arrow" style="font-size:0.8rem;opacity:0;transition:opacity 0.2s ease,transform 0.2s ease;display:inline-block;">→</span>
             </a>
           ))}
         </div>
@@ -143,7 +142,7 @@ if (!artist) return Astro.redirect('/artists');
     </section>
 
     <!-- FULL BIOGRAPHY -->
-    <section style="max-width:860px;margin:0 auto;padding:7rem 4rem;">
+    <section class="bio-section">
 
       <div style="width:40px;height:1px;background:rgba(245,240,232,0.15);margin-bottom:3rem;"></div>
 
@@ -168,6 +167,79 @@ if (!artist) return Astro.redirect('/artists');
 </Layout>
 
 <style>
+  .artist-hero {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 100vh;
+  }
+
+  .artist-portrait {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .portrait-fade-right {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to right, transparent 60%, #0a0a0a 100%);
+  }
+
+  .artist-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 9rem 5rem 5rem 4rem;
+    background: #0a0a0a;
+  }
+
+  /* Role label — allow wrap gracefully */
+  .artist-role {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    opacity: 0.5;
+    margin-bottom: 0.85rem;
+    line-height: 1.6;
+  }
+
+  .bio-section {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 7rem 4rem;
+  }
+
+  @media (max-width: 768px) {
+    .artist-hero {
+      grid-template-columns: 1fr;
+      min-height: auto;
+    }
+
+    .artist-portrait {
+  height: 70vw;
+  min-height: 280px;
+  max-height: 400px;
+}
+
+    .portrait-fade-right {
+      background: linear-gradient(to bottom, transparent 50%, #0a0a0a 100%);
+    }
+
+    .artist-info {
+      padding: 2.5rem 1.5rem 4rem;
+    }
+
+    /* Slightly smaller role text on mobile to avoid awkward wrapping */
+    .artist-role {
+      font-size: 0.65rem;
+      letter-spacing: 0.25em;
+    }
+
+    .bio-section {
+      padding: 4rem 1.5rem;
+    }
+  }
+
   .work-link:hover {
     opacity: 1 !important;
     border-color: rgba(245,240,232,0.6) !important;

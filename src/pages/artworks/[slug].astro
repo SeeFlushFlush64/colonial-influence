@@ -1,7 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 
-
 const artworks = {
   fergusson: {
     number: '01',
@@ -92,60 +91,110 @@ if (!art) return Astro.redirect('/artworks');
 ---
 
 <Layout title={art.title}>
+
   <!-- Hero -->
   <section style="position:relative;height:70vh;overflow:hidden;display:flex;align-items:flex-end;">
-    <img src={art.image} alt={art.title} style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(0.4);" />
+    <img
+      src={art.image}
+      alt={art.title}
+      style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(0.4);"
+    />
     <div style="position:absolute;inset:0;background:linear-gradient(to top, rgba(10,10,10,1) 0%, transparent 60%);"></div>
-    <div style="position:relative;padding:4rem;width:100%;">
+    <div style="position:relative;padding:2rem 1.5rem;width:100%;">
       <p style="font-size:0.7rem;letter-spacing:0.4em;opacity:0.5;margin-bottom:1rem;">/{art.number} — {art.location}</p>
-      <h1 style="font-family:'Cormorant Garamond',serif;font-size:clamp(3rem,6vw,6rem);font-weight:300;line-height:1;">{art.title}</h1>
+      <h1 style="font-family:'Cormorant Garamond',serif;font-size:clamp(2.2rem,6vw,6rem);font-weight:300;line-height:1;">{art.title}</h1>
       <p style="font-size:0.8rem;letter-spacing:0.2em;text-transform:uppercase;opacity:0.6;margin-top:0.75rem;">{art.subtitle}</p>
     </div>
   </section>
 
   <!-- Content -->
-  <section style="max-width:1100px;margin:0 auto;padding:6rem 4rem;display:grid;grid-template-columns:1fr 320px;gap:6rem;">
-    
-    <!-- Main -->
-    <div>
-      <p style="font-size:1.1rem;line-height:1.9;opacity:0.8;margin-bottom:4rem;">{art.description}</p>
+  <section class="artwork-content">
+
+    <!-- Main text -->
+    <div class="artwork-main">
+      <p style="font-size:1.05rem;line-height:1.9;opacity:0.8;margin-bottom:3rem;">{art.description}</p>
 
       <h2 style="font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:400;margin-bottom:1rem;">Historical Context</h2>
-      <p style="font-size:0.95rem;line-height:1.9;opacity:0.7;margin-bottom:4rem;">{art.historical}</p>
+      <p style="font-size:0.95rem;line-height:1.9;opacity:0.7;margin-bottom:3rem;">{art.historical}</p>
 
       <h2 style="font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:400;margin-bottom:1rem;">Artistic Analysis</h2>
-      <p style="font-size:0.95rem;line-height:1.9;opacity:0.7;">{art.analysis}</p>
+      <p style="font-size:0.95rem;line-height:1.9;opacity:0.7;margin-bottom:2rem;">{art.analysis}</p>
     </div>
 
-    <!-- Sidebar -->
-    <div style="border-left:1px solid rgba(245,240,232,0.1);padding-left:3rem;">
+    <!-- Details sidebar -->
+    <div class="artwork-sidebar">
       <h3 style="font-size:0.65rem;letter-spacing:0.3em;text-transform:uppercase;opacity:0.4;margin-bottom:2rem;">Artwork Details</h3>
-      
-      <div style="margin-bottom:1.5rem;">
-        <p style="font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;opacity:0.4;margin-bottom:0.4rem;">Artist</p>
-        {art.artistSlug ? (
-          <a href={`/artists/${art.artistSlug}`} style="font-size:1rem;color:#f5f0e8;text-decoration:none;border-bottom:1px solid rgba(245,240,232,0.3);">{art.artist}</a>
-        ) : (
-          <p style="font-size:1rem;">{art.artist}</p>
-        )}
+
+      <div class="artwork-details-grid">
+        <div>
+          <p style="font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;opacity:0.4;margin-bottom:0.4rem;">Artist</p>
+          {art.artistSlug ? (
+            <a href={`/artists/${art.artistSlug}`} style="font-size:1rem;color:#f5f0e8;text-decoration:none;border-bottom:1px solid rgba(245,240,232,0.3);">{art.artist}</a>
+          ) : (
+            <p style="font-size:1rem;">{art.artist}</p>
+          )}
+        </div>
+        <div>
+          <p style="font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;opacity:0.4;margin-bottom:0.4rem;">Medium</p>
+          <p style="font-size:1rem;">{art.medium}</p>
+        </div>
+        <div>
+          <p style="font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;opacity:0.4;margin-bottom:0.4rem;">Date</p>
+          <p style="font-size:1rem;">{art.date}</p>
+        </div>
+        <div>
+          <p style="font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;opacity:0.4;margin-bottom:0.4rem;">Location</p>
+          <p style="font-size:1rem;">{art.location}</p>
+        </div>
       </div>
 
-      <div style="margin-bottom:1.5rem;">
-        <p style="font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;opacity:0.4;margin-bottom:0.4rem;">Medium</p>
-        <p style="font-size:1rem;">{art.medium}</p>
+      <div style="margin-top:2.5rem;">
+        <a href="/artworks" style="font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;color:#f5f0e8;text-decoration:none;opacity:0.5;">← Back to Collection</a>
       </div>
-
-      <div style="margin-bottom:1.5rem;">
-        <p style="font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;opacity:0.4;margin-bottom:0.4rem;">Date</p>
-        <p style="font-size:1rem;">{art.date}</p>
-      </div>
-
-      <div style="margin-bottom:3rem;">
-        <p style="font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;opacity:0.4;margin-bottom:0.4rem;">Location</p>
-        <p style="font-size:1rem;">{art.location}</p>
-      </div>
-
-      <a href="/artworks" style="font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;color:#f5f0e8;text-decoration:none;opacity:0.5;">← Back to Collection</a>
     </div>
+
   </section>
+
 </Layout>
+
+<style>
+  .artwork-content {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 5rem 4rem;
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 6rem;
+  }
+
+  .artwork-sidebar {
+    border-left: 1px solid rgba(245,240,232,0.1);
+    padding-left: 3rem;
+  }
+
+  .artwork-details-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  @media (max-width: 768px) {
+    .artwork-content {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+      padding: 3rem 1.5rem;
+    }
+
+    .artwork-sidebar {
+      border-left: none;
+      border-top: 1px solid rgba(245,240,232,0.1);
+      padding-left: 0;
+      padding-top: 2rem;
+    }
+
+    .artwork-details-grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem 2rem;
+    }
+  }
+</style>

@@ -11,34 +11,102 @@ const artworks = [
 ---
 
 <Layout title="Artworks">
+
   <!-- Header -->
-  <section style="padding:12rem 4rem 4rem;border-bottom:1px solid rgba(245,240,232,0.1);">
+  <section class="artworks-header">
     <p style="font-size:0.7rem;letter-spacing:0.4em;text-transform:uppercase;opacity:0.5;margin-bottom:1rem;">Virtual Tour</p>
-    <h1 style="font-family:'Cormorant Garamond',serif;font-size:clamp(3rem,6vw,6rem);font-weight:300;">The Collection</h1>
+    <h1 style="font-family:'Cormorant Garamond',serif;font-size:clamp(2.5rem,6vw,6rem);font-weight:300;">The Collection</h1>
   </section>
 
   <!-- Artwork List -->
   <section style="padding:2rem 0;">
     {artworks.map((art) => (
-      <a href={`/artworks/${art.slug}`} style="display:grid;grid-template-columns:80px 1fr 400px 80px;align-items:center;padding:2rem 4rem;border-bottom:1px solid rgba(245,240,232,0.08);text-decoration:none;color:#f5f0e8;transition:background 0.3s;gap:2rem;" onmouseover="this.style.background='rgba(245,240,232,0.03)'" onmouseout="this.style.background='transparent'">
-        
+      <a href={`/artworks/${art.slug}`} class="artwork-row">
+
         <!-- Number -->
-        <span style="font-size:0.75rem;letter-spacing:0.2em;opacity:0.4;">/{art.number}</span>
-        
+        <span class="artwork-number">/{art.number}</span>
+
         <!-- Title + Artist -->
-        <div>
-          <h2 style="font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:300;margin-bottom:0.25rem;">{art.title}</h2>
+        <div class="artwork-text">
+          <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(1.4rem,3vw,2.2rem);font-weight:300;margin-bottom:0.25rem;">{art.title}</h2>
           <p style="font-size:0.75rem;letter-spacing:0.15em;text-transform:uppercase;opacity:0.5;">{art.artist}</p>
         </div>
 
         <!-- Thumbnail -->
-        <div style="height:120px;overflow:hidden;">
+        <div class="artwork-thumb">
           <img src={art.image} alt={art.title} style="width:100%;height:100%;object-fit:cover;opacity:0.7;filter:grayscale(30%);" />
         </div>
 
         <!-- Arrow -->
-        <span style="text-align:right;opacity:0.4;font-size:1.2rem;">→</span>
+        <span class="artwork-arrow">→</span>
       </a>
     ))}
   </section>
+
 </Layout>
+
+<style>
+  .artworks-header {
+    padding: 12rem 4rem 4rem;
+    border-bottom: 1px solid rgba(245,240,232,0.1);
+  }
+
+  .artwork-row {
+    display: grid;
+    grid-template-columns: 80px 1fr 400px 80px;
+    align-items: center;
+    padding: 2rem 4rem;
+    border-bottom: 1px solid rgba(245,240,232,0.08);
+    text-decoration: none;
+    color: #f5f0e8;
+    transition: background 0.3s;
+    gap: 2rem;
+  }
+
+  .artwork-row:hover {
+    background: rgba(245,240,232,0.03);
+  }
+
+  .artwork-number {
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    opacity: 0.4;
+  }
+
+  .artwork-text {
+    min-width: 0;
+  }
+
+  .artwork-thumb {
+    height: 120px;
+    overflow: hidden;
+  }
+
+  .artwork-arrow {
+    text-align: right;
+    opacity: 0.4;
+    font-size: 1.2rem;
+  }
+
+  @media (max-width: 768px) {
+    .artworks-header {
+      padding: 8rem 1.5rem 3rem;
+    }
+
+    .artwork-row {
+      grid-template-columns: 40px 1fr 100px;
+      grid-template-rows: auto;
+      padding: 1.5rem 1.5rem;
+      gap: 1rem;
+    }
+
+    /* Hide arrow on mobile */
+    .artwork-arrow {
+      display: none;
+    }
+
+    .artwork-thumb {
+      height: 80px;
+    }
+  }
+</style>
